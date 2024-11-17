@@ -1,14 +1,36 @@
 /*
  * @Author: HuanXX shy2757539057@163.com
- * @Date: 2024-11-17 21:29:41
+ * @Date: 2024-11-17 22:48:49
  * @LastEditors: HuanXX
- * @LastEditTime: 2024-11-17 21:40:43
+ * @LastEditTime: 2024-11-17 23:05:33
  * @Description: file content
  */
-export default function Page() {
+import BlogData from "@/app/components/Blog/blogData";
+import BlogItem from "@/app/components/Blog/BlogItem";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blog Page - Solid SaaS Boilerplate",
+  description: "This is Blog page for Solid Pro",
+  // other metadata
+};
+
+const BlogPage = async () => {
   return (
-    <div className='ml-auto mr-0 min-w-max'>
-        <h1 className="text-white text-lg ml-auto p-0">Nothing !</h1>
-    </div>
+    <>
+      {/* <!-- ===== Blog Grid Start ===== --> */}
+      <section className="py-20 lg:py-25 xl:py-30">
+        <div className="mx-auto mt-15 max-w-c-1280 px-4 md:px-8 xl:mt-20 xl:px-0">
+          <div className="grid grid-cols-1 gap-7.5 md:grid-cols-2 lg:grid-cols-3 xl:gap-10">
+            {BlogData.map((post, key) => (
+              <BlogItem key={key} blog={post} />
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* <!-- ===== Blog Grid End ===== --> */}
+    </>
   );
-}
+};
+
+export default BlogPage;

@@ -1,24 +1,42 @@
 /*
  * @Author: HuanXX shy2757539057@163.com
- * @Date: 2024-11-17 18:33:43
+ * @Date: 2024-11-17 22:48:49
  * @LastEditors: HuanXX
- * @LastEditTime: 2024-11-17 21:50:42
+ * @LastEditTime: 2024-11-17 23:02:09
  * @Description: file content
  */
-import Nav from '@/app/navigation/page'
+"use client";
+import Footer from "@/app/components/Footer";
+import Header from "@/app/components/Header";
+import Lines from "@/app/components/Lines";
+import ScrollToTop from "@/app/components/ScrollToTop";
+import { ThemeProvider } from "next-themes";
+import { Inter } from "next/font/google";
+import "./globals.css";
+const inter = Inter({ subsets: ["latin"] });
+
+import ToasterContext from "./context/ToastContext";
+
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="h-full">
-      <head>
-        <title>Huanxx Bolg Home</title>
-      </head>
-      <body className="h-full w-full bg-gradient-to-b from-black from-80% to-gray-900 to-100%">
-        <Nav />
-        <main className=' w-full mt-20'>{children}</main>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`dark:bg-black ${inter.className}`}>
+        <ThemeProvider
+          enableSystem={false}
+          attribute="class"
+          defaultTheme="light"
+        >
+          <Lines />
+          <Header />
+          <ToasterContext />
+          {children}
+          <Footer />
+          <ScrollToTop />
+        </ThemeProvider>
       </body>
     </html>
   );
