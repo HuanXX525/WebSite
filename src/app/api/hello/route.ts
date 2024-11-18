@@ -1,7 +1,14 @@
+/*
+ * @Author: HuanXX shy2757539057@163.com
+ * @Date: 2024-11-17 22:43:53
+ * @LastEditors: HuanXX
+ * @LastEditTime: 2024-11-18 12:28:31
+ * @Description: file content
+ */
 import type { NextRequest } from 'next/server'
 import { getRequestContext } from '@cloudflare/next-on-pages'
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 export async function GET(request: NextRequest) {
   let responseText = 'Hello World'

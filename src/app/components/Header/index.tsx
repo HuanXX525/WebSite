@@ -9,14 +9,13 @@ import menuData from "./menuData";
 
 const Header = () => {
   const [navigationOpen, setNavigationOpen] = useState(false);
-  const [dropdownToggler, setDropdownToggler] = useState(false);
   const [stickyMenu, setStickyMenu] = useState(false);
 
-  const pathUrl = usePathname();
+  const pathUrl = usePathname(); // 获取当前的URL部分,用于判断当前是正在那个页面
 
   // Sticky menu
   const handleStickyMenu = () => {
-    if (window.scrollY >= 80) {
+    if (window.scrollY >= 80) { // 根判断据下滚的像素
       setStickyMenu(true);
     } else {
       setStickyMenu(false);
@@ -24,6 +23,7 @@ const Header = () => {
   };
 
   useEffect(() => {
+    // 捕获屏幕滚动
     window.addEventListener("scroll", handleStickyMenu);
   });
 
@@ -31,28 +31,25 @@ const Header = () => {
     <header
       className={`fixed left-0 top-0 z-99999 w-full py-7 ${
         stickyMenu
-          ? "bg-white !py-4 shadow transition duration-100 dark:bg-black"
-          : ""
+          ? "backdrop-blur bg-whitet transition-all duration-300 !py-4 shadow dark:bg-blackt"
+          : "transition-all duration-300 bg-white dark:bg-black"
       }`}
     >
       <div className="relative mx-auto max-w-c-1390 items-center justify-between px-4 md:px-8 xl:flex 2xl:px-0">
         <div className="flex w-full items-center justify-between xl:w-1/4">
-          <a href="/">
+          {/* 头像 */}
+          <a href="/" className="flex gap-4 items-center">
             <Image
-              src="/images/logo/logo-dark.svg"
+              src="/images/pic/headpic.jpeg"
               alt="logo"
-              width={119.03}
-              height={30}
-              className="hidden w-full dark:block"
+              width={40}
+              height={40}
+              // className="hidden w-full dark:block"
+              className="w-full ring-4 rounded-full"
             />
-            <Image
-              src="/images/logo/logo-light.svg"
-              alt="logo"
-              width={119.03}
-              height={30}
-              className="w-full dark:hidden"
-            />
+            <span className="text-4xl text-black dark:text-white font-bold">Huanxx</span>
           </a>
+          {/* 头像 */}
 
           {/* <!-- Hamburger Toggle BTN --> */}
           <button
@@ -99,74 +96,41 @@ const Header = () => {
         <div
           className={`invisible h-0 w-full items-center justify-between xl:visible xl:flex xl:h-auto xl:w-full ${
             navigationOpen &&
-            "navbar !visible mt-4 h-auto max-h-[400px] rounded-md bg-white p-7.5 shadow-solid-5 dark:bg-blacksection xl:h-auto xl:p-0 xl:shadow-none xl:dark:bg-transparent"
+            "transition-all duration-300 navbar !visible mt-4 h-auto max-h-[400px] rounded-md bg-whitet p-7.5 shadow-solid-5 dark:bg-transparent"
           }`}
         >
           <nav>
             <ul className="flex flex-col gap-5 xl:flex-row xl:items-center xl:gap-10">
               {menuData.map((menuItem, key) => (
-                <li key={key} className={menuItem.submenu && "group relative"}>
-                  {menuItem.submenu ? (
-                    <>
-                      <button
-                        onClick={() => setDropdownToggler(!dropdownToggler)}
-                        className="flex cursor-pointer items-center justify-between gap-3 hover:text-primary"
-                      >
-                        {menuItem.title}
-                        <span>
-                          <svg
-                            className="h-3 w-3 cursor-pointer fill-waterloo group-hover:fill-primary"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 512 512"
-                          >
-                            <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
-                          </svg>
-                        </span>
-                      </button>
-
-                      <ul
-                        className={`dropdown ${dropdownToggler ? "flex" : ""}`}
-                      >
-                        {menuItem.submenu.map((item, key) => (
-                          <li key={key} className="hover:text-primary">
-                            <Link href={item.path || "#"}>{item.title}</Link>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : (
+                <li key={key}>
                     <Link
                       href={`${menuItem.path}`}
                       className={
-                        pathUrl === menuItem.path
+                        `font-bold text-lg ${pathUrl === menuItem.path
                           ? "text-primary hover:text-primary"
-                          : "hover:text-primary"
+                          : "hover:text-primary"}`
                       }
                     >
                       {menuItem.title}
                     </Link>
-                  )}
                 </li>
               ))}
             </ul>
           </nav>
 
           <div className="mt-7 flex items-center gap-6 xl:mt-0">
+            {/* 显示模式切换 */}
             <ThemeToggler />
-
+          
+            {/* GitHub */}
             <Link
-              href="https://github.com/NextJSTemplates/solid-nextjs"
+              target="blank"
+              href="https://github.com/HuanXX525/website"
               className="text-regular font-medium text-waterloo hover:text-primary"
             >
-              GitHub Repo 🌟
+              GitHub Repo 
             </Link>
-
-            <Link
-              href="https://nextjstemplates.com/templates/solid"
-              className="flex items-center justify-center rounded-full bg-primary px-7.5 py-2.5 text-regular text-white duration-300 ease-in-out hover:bg-primaryho"
-            >
-              Get Pro 🔥
-            </Link>
+            {/* GitHub仓库 */}
           </div>
         </div>
       </div>
