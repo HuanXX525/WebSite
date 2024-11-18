@@ -45,9 +45,9 @@ const Header = () => {
               width={40}
               height={40}
               // className="hidden w-full dark:block"
-              className="w-full ring-4 rounded-full"
+              className="w-full ring-4 rounded-full max-w-10 max-h-10 shrink"
             />
-            <span className="text-4xl text-black dark:text-white font-bold">Huanxx</span>
+            <span className="text-4xl text-black dark:text-white font-bold shrink">Huanxx</span>
           </a>
           {/* 头像 */}
 
